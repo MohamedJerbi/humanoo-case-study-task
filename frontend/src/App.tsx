@@ -1,12 +1,18 @@
-import "./App.css";
-
-import { Button } from "@/components/ui/button";
+import WrapperContainer from "./components/Wrappers/WrapperContainer";
+import { ActivityList } from "./pages/ActivityList/ActivityList";
+import { Route, Routes } from "react-router";
+import CreateActivity from "./pages/CreateActivity/CreateActivity";
+import UpdateActivity from "./pages/UpdateActivity/UpdateActivity";
 
 function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
+    <WrapperContainer>
+      <Routes>
+        <Route path="/" element={<ActivityList />} />
+        <Route path="/create" element={<CreateActivity />} />
+        <Route path="/update/:id" element={<UpdateActivity />} />
+      </Routes>
+    </WrapperContainer>
   );
 }
 

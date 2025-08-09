@@ -4,6 +4,7 @@ const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 
 export const ActivitiesAPI = {
   list: () => http<Activity[]>("/api/activities"),
+  get: (id: string) => http<Activity>(`/api/activities/${id}`),
   create: (body: ActivityFormData) =>
     http<Activity>("/api/activities", {
       method: "POST",

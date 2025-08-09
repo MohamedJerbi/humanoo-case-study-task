@@ -33,7 +33,8 @@ interface ActivityFormProps {
 
 const ActivityForm = ({ activity, mode }: ActivityFormProps) => {
   const navigate = useNavigate();
-  const { createActivity, updateActivity, loading, error, clearError } =
+  const [loading, setLoading] = useState(false);
+  const { createActivity, updateActivity, error, clearError } =
     useActivityStore();
 
   const [formData, setFormData] = useState<ActivityFormData>({
@@ -100,6 +101,7 @@ const ActivityForm = ({ activity, mode }: ActivityFormProps) => {
     }
 
     try {
+      setLoading(true);
       if (mode === "create") {
         await createActivity(formData);
       } else if (activity) {
@@ -107,7 +109,10 @@ const ActivityForm = ({ activity, mode }: ActivityFormProps) => {
       }
       navigate("/");
       // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-empty
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCancel = () => {

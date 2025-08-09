@@ -7,28 +7,31 @@ import { AlertCircle } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ActivityForm from "../../components/ActivityForm/ActivityForm";
+import { ActivitiesAPI } from "@/utils/api";
 
 export default function UpdateActivity() {
-  const params = useParams();
   const navigate = useNavigate();
-  const { activities, loading, fetchActivities } = useActivityStore();
-  const [activity, setActivity] = useState<Activity | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
+  const params = useParams();
   const activityId = params.id as string;
+  const cachedActivity = useActivityStore((state) =>
+    state.activities.find((a) => a.id === activityId)
+  );
+
+  const [activity, setActivity] = useState<Activity | null>(
+    cachedActivity || null
+  );
+
+  const [loading, setLoading] = useState<boolean>(!cachedActivity);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadActivity = async () => {
       try {
-        // If activities are not loaded, fetch them first
-        if (activities.length === 0) {
-          await fetchActivities();
-        }
-        console.log(activities, activityId);
-        const foundActivity = activities.find((a) => a.id === activityId);
-        console.log(foundActivity);
-        if (foundActivity) {
-          setActivity(foundActivity);
+        setLoading(true);
+        const activity = await ActivitiesAPI.get(activityId);
+
+        if (activity) {
+          setActivity(activity);
           setError(null);
         } else {
           setError("Activity not found");
@@ -36,11 +39,15 @@ export default function UpdateActivity() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("Failed to load activity");
+      } finally {
+        setLoading(false);
       }
     };
 
-    loadActivity();
-  }, [activityId, activities]);
+    if (!activity) {
+      loadActivity();
+    }
+  }, [activityId, activity]);
 
   if (loading) {
     return (

@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router";
 export const Navigation = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  console.log("Current Pathname:", pathname);
 
   return (
     <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 mb-8">

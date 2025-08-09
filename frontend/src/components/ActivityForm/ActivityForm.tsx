@@ -25,6 +25,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import { Categories } from "@/types/enums";
 import SelectDifficulty from "./SelectDifficulty";
 import Equipments from "./Equipments";
+import Duration from "./Duration";
 
 interface ActivityFormProps {
   activity?: Activity;
@@ -181,30 +182,16 @@ const ActivityForm = ({ activity, mode }: ActivityFormProps) => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="duration">Duration (minutes) *</Label>
-                <Input
-                  id="duration"
-                  type="number"
-                  min="1"
-                  max="480"
-                  value={formData.durationMinutes}
-                  onChange={(e) =>
-                    handleInputChange(
-                      "durationMinutes",
-                      Number.parseInt(e.target.value) || 0
-                    )
-                  }
-                  className={
-                    validationErrors.durationMinutes ? "border-destructive" : ""
-                  }
-                />
-                {validationErrors.durationMinutes && (
-                  <p className="text-sm text-destructive">
-                    {validationErrors.durationMinutes}
-                  </p>
-                )}
-              </div>
+              <Duration
+                durationMinutes={formData.durationMinutes}
+                handleInputChange={(e) =>
+                  handleInputChange(
+                    "durationMinutes",
+                    Number.parseInt(e.target.value) || 0
+                  )
+                }
+                error={validationErrors.durationMinutes}
+              />
 
               <SelectDifficulty
                 value={formData.difficulty.toString()}

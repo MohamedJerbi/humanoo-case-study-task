@@ -161,9 +161,9 @@ const ActivityForm = ({ activity, mode }: ActivityFormProps) => {
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {Object.values(Categories).map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
+                  {Object.entries(Categories).map(([key, value]) => (
+                    <SelectItem key={key} value={value}>
+                      {key}
                     </SelectItem>
                   ))}
                 </SelectContent>

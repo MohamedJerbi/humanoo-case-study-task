@@ -1,5 +1,5 @@
 import type { Activity, ActivityFormData } from "@/types/activity";
-import { Categories } from "@/types/enums";
+import { ActivitiesAPI } from "@/utils/api";
 import { create } from "zustand";
 
 export interface ActivityStore {
@@ -13,43 +13,22 @@ export interface ActivityStore {
   clearError: () => void;
 }
 
-export const useActivityStore = create<ActivityStore>((set, get) => ({
+export const useActivityStore = create<ActivityStore>((set) => ({
   activities: [],
   loading: true,
   error: null,
 
   fetchActivities: async () => {
     set({ loading: true, error: null });
-    setTimeout(() => {
-      set({
-        loading: false,
-        activities: [
-          {
-            id: "1",
-            title: "Activity 1",
-            category: Categories.Fitness,
-            durationMinutes: 30,
-            difficulty: 2,
-            scheduleDate: "2023-10-01",
-            equipments: ["Yoga Mat"],
-          },
-        ],
-      });
-    }, 1000);
+    const activities = await ActivitiesAPI.list();
+    set({ loading: false, activities });
   },
 
   createActivity: async (activityData: ActivityFormData) => {
     set({ loading: true, error: null });
 
     try {
-      const newActivity = await new Promise<Activity>((resolve) => {
-        setTimeout(() => {
-          resolve({
-            id: Math.random().toString(36).substring(2, 15),
-            ...activityData,
-          });
-        }, 1000);
-      });
+      const newActivity = await ActivitiesAPI.create(activityData);
       set((state) => ({
         activities: [...state.activities, newActivity],
         loading: false,
@@ -67,7 +46,7 @@ export const useActivityStore = create<ActivityStore>((set, get) => ({
   updateActivity: async (id: string, activityData: ActivityFormData) => {
     set({ loading: true, error: null });
     try {
-      const updatedActivity = { ...activityData, id };
+      const updatedActivity = await ActivitiesAPI.update(id, activityData);
       set((state) => ({
         activities: state.activities.map((activity) =>
           activity.id === id ? updatedActivity : activity
@@ -87,7 +66,7 @@ export const useActivityStore = create<ActivityStore>((set, get) => ({
   deleteActivity: async (id: string) => {
     set({ loading: true, error: null });
     try {
-      // TODO API CALL
+      await ActivitiesAPI.remove(id);
       set((state) => ({
         activities: state.activities.filter((activity) => activity.id !== id),
         loading: false,

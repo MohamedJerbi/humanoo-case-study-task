@@ -1,11 +1,12 @@
 package com.example.backend.domain;
 
 public enum Category {
-    YOGA,
-    MEDITATION,
-    CARDIO,
-    STRENGTH,
-    MINDFULNESS,
-    PILATES,
-    STRETCHING
+  FITNESS,
+  MINDFULNESS,
+  NUTRITION,
+  SLEEP,
+  SOCIAL,
+  OUTDOOR,
+  CREATIVE,
+  LEARNING,
 }

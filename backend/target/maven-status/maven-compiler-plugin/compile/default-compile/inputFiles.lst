@@ -1,0 +1,10 @@
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/BackendApplication.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/config/CorsConfig.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/controller/ActivityController.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/domain/Activity.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/domain/Category.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/dto/ActivityRequest.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/dto/ActivityResponse.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/repository/ActivityRepository.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/service/ActivityService.java
+/Users/test/Documents/Projects/studay-case-humanoo/backend/backend/src/main/java/com/example/backend/service/ActivityServiceImpl.java

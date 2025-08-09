@@ -1,7 +1,9 @@
+import type { Categories } from "./enums";
+
 export interface Activity {
   id: string;
   title: string;
-  category: string;
+  category: Categories;
   durationMinutes: number;
   difficulty: 1 | 2 | 3;
   scheduleDate: string;

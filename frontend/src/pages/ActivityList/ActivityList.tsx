@@ -5,7 +5,7 @@ import { useActivityStore } from "@/store/activityStore";
 import NoActivity from "./NoActivity";
 import ActivityError from "./ActivityError";
 
-export const ActivityList = () => {
+const ActivityList = () => {
   const {
     activities,
     loading,
@@ -71,3 +71,5 @@ export const ActivityList = () => {
     </div>
   );
 };
+
+export default ActivityList;

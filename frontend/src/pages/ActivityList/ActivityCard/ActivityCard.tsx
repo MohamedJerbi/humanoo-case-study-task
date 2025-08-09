@@ -28,7 +28,7 @@ export const ActivityCard = ({ activity, onDelete }: ActivityCardProps) => {
           </CardTitle>
           <div className="flex gap-1 ml-2">
             <Button
-              onClick={() => navigate(`/edit/${activity.id}`)}
+              onClick={() => navigate(`/update/${activity.id}`)}
               variant="ghost"
               size="icon"
               className="h-8 w-8"
